@@ -1,0 +1,45 @@
+<div
+    cdkOverlayOrigin
+    #searchContainer
+    #searchAnchor="cdkOverlayOrigin"
+    class="flex items-center search-toolbar"
+    [class.focus]="isExpanded"
+    [class.expand]="isExpanded"
+>
+    <button mat-icon-button *ngIf="searchBtnEnabled" (click)="onSearch.emit()">
+        <mat-icon> search </mat-icon>
+    </button>
+
+    <ng-content select="[leftPanel]"> </ng-content>
+
+    <div class="flex-grow">
+        <ng-content></ng-content>
+    </div>
+
+    <button mat-icon-button *ngIf="clearBtnEnabled" (click)="onClear.emit()">
+        <mat-icon> close </mat-icon>
+    </button>
+
+    <button mat-icon-button *ngIf="expandable" (click)="toggleExpansion()">
+        <mat-icon> graphic_eq </mat-icon>
+    </button>
+
+    <ng-content select="[rightPanel]"></ng-content>
+</div>
+
+<ng-template
+    cdkConnectedOverlay
+    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayOrigin]="searchAnchor"
+    [cdkConnectedOverlayOpen]="isExpanded"
+    (backdropClick)="isExpanded = false"
+>
+    <!-- adding 4px to complement border width -->
+    <div
+        class="search-toolbar-popover"
+        [style.width.px]="searchContainer.clientWidth + 4"
+    >
+        <ng-container [ngTemplateOutlet]="expandContent"></ng-container>
+    </div>
+</ng-template>

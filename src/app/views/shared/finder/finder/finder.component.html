@@ -1,0 +1,11 @@
+<div class="absolute w-full">
+  <app-loading
+    [modal]="appLoading.modal"
+    [mode]="appLoading.mode"
+  ></app-loading>
+</div>
+<div class="p-4 pl-6 max-w-4xl">
+  <app-toolbar (onSubmitSearch)="cc.submitSearch($event)"></app-toolbar>
+</div>
+<app-country-catalog-listing #cc (onFetching)="toggleProgressbar($event)">
+</app-country-catalog-listing>

@@ -1,0 +1,82 @@
+<app-aux-dialog *ngIf="value.length > 0; else none" height="500px">
+  <div modal-header>
+    <div class="p-2 flex items-center justify-between">
+      <span class="text-xl">{{ value[0].name.common }}</span>
+      <button mat-icon-button style="height: auto" (click)="dialog.close()">
+        <mat-icon style="font-size: 8pt">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div modal-body class="flex flex-col p-2 space-y-3 space-x-3">
+    <img
+      src="{{ value[0].flags.png }}"
+      class="w-1/2 h-40 object-cover rounded-xl"
+    />
+
+    <div class="flex space-x-4">
+      <img
+        class="w-5 h-5"
+        src="https://cdn-icons-png.flaticon.com/512/355/355980.png"
+      />
+
+      <a
+        class="underline text-primary-500"
+        href="{{ value[0].maps.googleMaps }}"
+        target="_blank"
+      >
+        Google Map
+      </a>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="flex space-x-4">
+      <div
+        #exteriorContainer
+        class="border-2 rounded-full flex justify-center items-center bg-primary-500 w-5 h-5"
+      >
+        <div class="border rounded-full w-1/2 h-1/2 bg-accent-500"></div>
+      </div>
+
+      <span>Region : {{ value[0].region }} </span>
+    </div>
+
+    <div class="flex space-x-4">
+      <div
+        #exteriorContainer
+        class="border-2 rounded-full flex justify-center items-center bg-primary-500 w-5 h-5"
+      >
+        <div class="border rounded-full w-1/2 h-1/2 bg-accent-500"></div>
+      </div>
+
+      <span>Continents : {{ value[0].continents }} </span>
+    </div>
+
+    <div class="flex space-x-4">
+      <div
+        #exteriorContainer
+        class="border-2 rounded-full flex justify-center items-center bg-primary-500 w-5 h-5"
+      >
+        <div class="border rounded-full w-1/2 h-1/2 bg-accent-500"></div>
+      </div>
+
+      <span>Population : {{ value[0].population }} </span>
+    </div>
+
+    <div class="flex space-x-4">
+      <div
+        #exteriorContainer
+        class="border-2 rounded-full flex justify-center items-center bg-primary-500 w-5 h-5"
+      >
+        <div class="border rounded-full w-1/2 h-1/2 bg-accent-500"></div>
+      </div>
+
+      <span>Timezone : {{ value[0].timezones }} </span>
+    </div>
+  </div>
+
+  <div modal-footer></div>
+</app-aux-dialog>
+
+<ng-template #none></ng-template>

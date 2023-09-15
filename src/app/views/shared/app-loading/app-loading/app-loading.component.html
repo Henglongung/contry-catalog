@@ -1,0 +1,6 @@
+<div [class.overlay]="modal || modalWhen">
+  <mat-progress-bar
+    *ngIf="mode === 'linear' || linearWhen"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>

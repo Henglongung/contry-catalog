@@ -1,0 +1,120 @@
+const { guessProductionMode } = require("@ngneat/tailwind");
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+module.exports = {
+  prefix: "",
+  mode: process.env.TAILWIND_MODE ? "jit" : "",
+  purge: {
+    enabled: guessProductionMode(),
+    content: ["./src/**/*.{html,ts,css,scss,sass,less,styl,js}"],
+  },
+  darkMode: "class", // or 'media' or 'class'
+  theme: {
+    extend: {
+      fontFamily: {
+        ...fontFamily,
+        sans: ["Helvetica Neue", "Roboto", "sans-serif", ...fontFamily.sans],
+      },
+
+      colors: {
+        primary: {
+          50: "var(--primary-color-50)",
+          100: "var(--primary-color-100)",
+          200: "var(--primary-color-200)",
+          300: "var(--primary-color-300)",
+          400: "var(--primary-color-400)",
+          500: "var(--primary-color-500)",
+          600: "var(--primary-color-600)",
+          700: "var(--primary-color-700)",
+          800: "var(--primary-color-800)",
+          900: "var(--primary-color-900)",
+          a100: "var(--primary-color-a100)",
+          a200: "var(--primary-color-a200)",
+          a400: "var(--primary-color-a400)",
+          a700: "var(--primary-color-a700)",
+        },
+
+        accent: {
+          50: "var(--accent-color-50)",
+          100: "var(--accent-color-100)",
+          200: "var(--accent-color-200)",
+          300: "var(--accent-color-300)",
+          400: "var(--accent-color-400)",
+          500: "var(--accent-color-500)",
+          600: "var(--accent-color-600)",
+          700: "var(--accent-color-700)",
+          800: "var(--accent-color-800)",
+          900: "var(--accent-color-900)",
+          a100: "var(--accent-color-a100)",
+          a200: "var(--accent-color-a200)",
+          a400: "var(--accent-color-a400)",
+          a700: "var(--accent-color-a700)",
+        },
+
+        warn: {
+          50: "var(--warn-color-50)",
+          100: "var(--warn-color-100)",
+          200: "var(--warn-color-200)",
+          300: "var(--warn-color-300)",
+          400: "var(--warn-color-400)",
+          500: "var(--warn-color-500)",
+          600: "var(--warn-color-600)",
+          700: "var(--warn-color-700)",
+          800: "var(--warn-color-800)",
+          900: "var(--warn-color-900)",
+          a100: "var(--warn-color-a100)",
+          a200: "var(--warn-color-a200)",
+          a400: "var(--warn-color-a400)",
+          a700: "var(--warn-color-a700)",
+        },
+
+        contrast: {
+          50: "var(--contrast-color-50)",
+          100: "var(--contrast-color-100)",
+          200: "var(--contrast-color-200)",
+          300: "var(--contrast-color-300)",
+          400: "var(--contrast-color-400)",
+          500: "var(--contrast-color-500)",
+          600: "var(--contrast-color-600)",
+          700: "var(--contrast-color-700)",
+          800: "var(--contrast-color-800)",
+          900: "var(--contrast-color-900)",
+          a100: "var(--contrast-color-a100)",
+          a200: "var(--contrast-color-a200)",
+          a400: "var(--contrast-color-a400)",
+          a700: "var(--contrast-color-a700)",
+        },
+
+        secondary: {
+          50: "var(--secondary-color-50)",
+          100: "var(--secondary-color-100)",
+          200: "var(--secondary-color-200)",
+          300: "var(--secondary-color-300)",
+          400: "var(--secondary-color-400)",
+          500: "var(--secondary-color-500)",
+          600: "var(--secondary-color-600)",
+          700: "var(--secondary-color-700)",
+          800: "var(--secondary-color-800)",
+          900: "var(--secondary-color-900)",
+          a100: "var(--secondary-color-a100)",
+          a200: "var(--secondary-color-a200)",
+          a400: "var(--secondary-color-a400)",
+          a700: "var(--secondary-color-a700)",
+        },
+      },
+    },
+    screens: {
+      xs: { min: "320px", max: "639px" },
+      sm: { min: "640px", max: "767px" },
+      md: { min: "768px", max: "1024px" },
+      lg: "1025px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  content: ["./src/**/*.{html,ts}"],
+  plugins: [require("@tailwindcss/typography")],
+};

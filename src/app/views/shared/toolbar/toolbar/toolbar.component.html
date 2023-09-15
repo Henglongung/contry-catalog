@@ -1,0 +1,27 @@
+<div class="flex space-x-2" [formGroup]="searchForm">
+  <app-search-toolbar
+    (onSearch)="submitSearch()"
+    (onClear)="clearFilter(); submitSearch()"
+    class="h-50 w-full"
+  >
+    <div>
+      <input
+        (keydown.enter)="submitSearch()"
+        type="text"
+        matInput
+        formControlName="name"
+        placeholder="Search by Country Name"
+      />
+    </div>
+  </app-search-toolbar>
+
+  <mat-radio-group
+    formControlName="sorting"
+    aria-label="Select an option"
+    class="flex items-center space-x-4"
+    (change)="submitSearch()"
+  >
+    <mat-radio-button value="asc">Acending</mat-radio-button>
+    <mat-radio-button value="dsc">Decending</mat-radio-button>
+  </mat-radio-group>
+</div>

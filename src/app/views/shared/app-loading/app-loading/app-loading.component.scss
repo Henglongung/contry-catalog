@@ -1,0 +1,6 @@
+@use 'tailwindcss/utilities';
+
+.overlay {
+    @apply absolute left-0 top-0 w-full h-full flex items-center justify-center;
+    @apply z-50 bg-accent-300 opacity-40;
+}

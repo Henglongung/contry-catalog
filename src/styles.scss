@@ -1,0 +1,333 @@
+@use "styles/variables";
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "~@angular/material" as mat;
+// Plus imports for other components in your app.
+@use "styles/palette" as palette;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ng-material-tailwind-theming-primary: mat.define-palette(
+  palette.$primary-palette
+);
+$ng-material-tailwind-theming-accent: mat.define-palette(
+  palette.$accent-palette,
+  300,
+  400,
+  500
+);
+
+// The warn palette is optional (defaults to red).
+$ng-material-tailwind-theming-warn: mat.define-palette(palette.$warn-palette);
+$ng-material-tailwind-typography: mat.define-typography-config(
+  $font-family: theme("fontFamily.sans"),
+  $headline:
+    mat.define-typography-level(2rem, 1, 500, theme("fontFamily.serif")),
+  $title: mat.define-typography-level(1rem, 1, 500),
+  $subheading-2: mat.define-typography-level(0.8rem, 1, 400),
+  $subheading-1: mat.define-typography-level(0.4rem, 1, 400),
+);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ng-material-tailwind-theming-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ng-material-tailwind-theming-primary,
+      accent: $ng-material-tailwind-theming-accent,
+      warn: $ng-material-tailwind-theming-warn,
+    ),
+    typography: $ng-material-tailwind-typography,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($ng-material-tailwind-theming-theme);
+@include mat.all-component-typographies($ng-material-tailwind-theming-theme);
+
+html,
+body {
+  @apply h-full;
+}
+
+body {
+  @apply m-0;
+  @apply font-sans;
+  @apply bg-primary-50;
+}
+
+@layer base {
+  input,
+  select {
+    @apply p-2 m-0 border-none focus-visible:outline-none;
+    @apply bg-transparent;
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  // Fix ios Safari rounded color input
+  input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  table.mat-table,
+  mat-table {
+    @apply bg-transparent;
+
+    .mat-row {
+      @apply bg-contrast-50;
+    }
+
+    .mat-header-row {
+      @apply bg-primary-200 tracking-wider;
+      @apply rounded-t-2xl;
+
+      .mat-header-cell {
+        @apply relative z-[100];
+
+        &:first-child {
+          @apply rounded-tl-2xl;
+        }
+        &:last-child {
+          @apply rounded-tr-2xl;
+        }
+      }
+    }
+  }
+
+  mat-drawer-container.mat-drawer-container {
+    @apply bg-transparent;
+
+    .mat-drawer-backdrop.mat-drawer-shown {
+      @apply bg-primary-500 opacity-10;
+    }
+  }
+
+  .mat-dialog-container {
+    padding: 0 !important;
+
+    .mat-dialog-content {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .cdk-drag-placeholder {
+    @apply bg-primary-300;
+
+    * {
+      visibility: hidden;
+    }
+  }
+}
+
+@layer components {
+  .menu {
+    .menu-item {
+      @apply font-extralight tracking-widest;
+      margin-right: 0.5rem;
+      height: 2.5rem;
+
+      .active-line {
+        display: none;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      &:hover {
+        @apply bg-primary-100 rounded-r-2xl;
+      }
+
+      &.active {
+        @apply bg-primary-200 rounded-r-2xl;
+
+        .active-line {
+          @apply rounded-r-md;
+          display: block;
+          width: 5px;
+        }
+      }
+      .icon-color {
+        @apply bg-accent-500 text-contrast-500;
+      }
+    }
+
+    &.menu-contrast {
+      .menu-item {
+        @apply text-accent-500 font-normal tracking-normal;
+
+        &:hover {
+          @apply bg-accent-50;
+        }
+
+        &.active {
+          @apply bg-primary-100 rounded-r-2xl;
+        }
+      }
+    }
+  }
+
+  .search-toolbar {
+    @apply bg-accent-50 rounded-md border-2 border-transparent;
+
+    &:focus-within,
+    &.focus {
+      @apply border-accent-100 bg-contrast-800 shadow-lg;
+    }
+
+    &.expand {
+      @apply border-b-transparent rounded-b-none;
+    }
+  }
+
+  .swimlane {
+    .swimlane-header {
+      @apply sticky top-0 z-50 p-3;
+      @apply bg-primary-200 border-b border-primary-300;
+      @apply text-base tracking-wider;
+    }
+
+    .swimlane-body {
+      @apply border-r border-primary-300;
+      @apply bg-contrast-50;
+    }
+  }
+
+  * {
+    .swimlane:first-child {
+      .swimlane-header {
+        @apply rounded-tl-2xl;
+      }
+    }
+
+    .swimlane:last-child {
+      .swimlane-header {
+        @apply rounded-tr-2xl;
+      }
+
+      .swimlane-body {
+        @apply border-r-0;
+      }
+    }
+  }
+  .card {
+    @apply bg-accent-50 rounded-md rounded-tr-3xl shadow p-3;
+
+    .card-title {
+      @apply tracking-wide text-sm text-contrast-200 p-1 rounded-xl bg-primary-900;
+    }
+    .card-text-200 {
+      @apply text-accent-200;
+    }
+
+    .card-text-300 {
+      @apply text-accent-300;
+    }
+
+    .card-text-400 {
+      @apply text-accent-400;
+    }
+
+    &.transiting {
+      @apply animate-pulse opacity-20 bg-primary-100;
+    }
+  }
+
+  .form-container {
+    .form-toolbar {
+      @apply mt-2 flex justify-between items-center p-2 bg-accent-50 rounded-md shadow-md;
+
+      .form-toolbar-title {
+        @apply text-base text-primary-500;
+      }
+    }
+
+    .card {
+      @apply bg-contrast-50;
+
+      .card-title {
+        @apply inline;
+      }
+
+      .card-field-container {
+        @apply mt-3 -ml-6 flex flex-wrap items-center;
+
+        > * {
+          @apply ml-6;
+        }
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .clickable {
+    &:hover {
+      @apply relative z-50 drop-shadow-lg;
+    }
+    cursor: pointer;
+  }
+
+  .cdk-virtual-scroll-viewport {
+    // CdkVirtualScrollViewPort by default allows infinite item width leading to horizontal scroll of the entire
+    // virtual scroll view port.
+    // This helper class restricts the CdkVirtualScrollViewPort to max-width 100% eliminating the horizontal scroll.
+    &.fixed-w-full {
+      .cdk-virtual-scroll-content-wrapper {
+        @apply max-w-full;
+      }
+    }
+  }
+}
+.app-mat-option-min-h-80 .mat-option {
+  min-height: 80px;
+}
+
+.app-mat-option-min-h-100 .mat-option {
+  min-height: 100px;
+}
+
+.app-mat-option-min-h-120 .mat-option {
+  min-height: 120px;
+}
+
+.app-mat-option-min-h-160 .mat-option {
+  min-height: 160px;
+}
+
+.app-mat-option-min-h-200 .mat-option {
+  min-height: 200px;
+}
+
+.clear-mat-form-field-glitch {
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0;
+
+    .mat-form-field-underline {
+      bottom: 0;
+    }
+  }
+
+  // influence mat-hint
+  .mat-form-field-subscript-wrapper {
+    top: 100%;
+  }
+}
